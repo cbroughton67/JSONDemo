@@ -14,14 +14,17 @@ namespace JSONDemo
         {
             List<string> movieList = new List<string>();
 
+            // Load the current movie list, if it exists
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 string movies = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + filename);
                 movieList = JsonSerializer.Deserialize<List<string>>(movies);
             }
-
+            
+            // Add the new moving to the list
             movieList.Add(movieTitle);
 
+            // Save the updated list to the JSON file
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\" + filename, JsonSerializer.Serialize(movieList));
 
         }
@@ -30,19 +33,18 @@ namespace JSONDemo
         {
             List<string> movieList = new List<string>();
 
+            // Make sure the file is there before attempting to read it
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 string movies = File.ReadAllText(Directory.GetCurrentDirectory() + "\\" + filename);
+                
+                // Deserialize the JSON file into the List
                 movieList = JsonSerializer.Deserialize<List<string>>(movies);
 
                
             }
-            //else
-            //{
-            //    Console.WriteLine("No movies to display.\nPress any key to continue.");
-            //    Console.ReadKey();
-            //}
 
+            // Return the List to the caller
             return movieList;
 
         }
